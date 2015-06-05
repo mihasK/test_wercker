@@ -1,0 +1,30 @@
+box: mihas/python
+
+services:
+  - id: mihas/db
+    env:
+       POSTGRES_PASSWORD: mysecretpassword
+  - id: elasticsearch
+
+dev:
+  steps:
+  - internal/shell:
+      cmd: /bin/bash  #defaults to /bin/bash
+
+#  - pip-install:
+#      requirements_file: "civic/requirements.txt"
+
+  - script:
+      name: python unit test
+      code: |
+        cd ./civic && ./manage.py test
+
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps:
+    # A step that executes `pip install` command
+    # A custom script step, name value is used in the UI
+    # and the code value contains the command that get executed
+  
+  - pip-install
